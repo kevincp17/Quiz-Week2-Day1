@@ -1,0 +1,46 @@
+/*Soal 1 */
+create table project_assignment(
+	pras_proj_id integer not null,
+	foreign key (pras_proj_id) references projects(proj_id) on update cascade on delete cascade,
+	pras_employee_id integer not null,
+	foreign key (pras_employee_id) references employees(employee_id) on update cascade on delete cascade,
+	pras_startdate DATE,
+	pras_enddate DATE,
+	pras_status varchar(15),
+	primary key(pras_proj_id,pras_employee_id)
+)
+
+/*Soal 2 */
+alter table projects add column proj_description varchar(255);
+alter table projects add column proj_status varchar(15);
+alter table projects add column proj_amount integer;
+
+/*Soal 3 */
+alter table projects add column proj_account_mgr integer
+alter table employees add column proj_account_mgr integer 
+alter table employees add constraint employees_proj_account_mgr_fkey foreign key (proj_account_mgr) references projects(proj_account_mgr)
+
+
+/*Soal 4 */
+INSERT INTO public.projects(proj_name, proj_createdon, proj_duedate, proj_cust_name, proj_description, proj_status) VALUES ('E-Commerce', now(), now()+interval '30 days','Telkomsel', null, 'IN PROGRESS');
+	
+INSERT INTO public.projects(proj_name, proj_createdon, proj_duedate, proj_cust_name, proj_description, proj_status) VALUES ('Traveloka', now(), now()+interval '30 days','XL', null, 'IN PROGRESS');
+	
+INSERT INTO public.projects(proj_name, proj_createdon, proj_duedate, proj_cust_name, proj_description, proj_status) VALUES ('TIKET.COM', now(), now()+interval '30 days','INDOSAT', null, 'IN PROGRESS');
+
+/*Soal 5 */
+INSERT INTO public.project_assignment(pras_proj_id, pras_employee_id, pras_startdate, pras_enddate, pras_status) VALUES (1, 104, now(), null, 'ASSIGNED');
+
+INSERT INTO public.project_assignment(pras_proj_id, pras_employee_id, pras_startdate, pras_enddate, pras_status) VALUES (1, 105, now(), now()+ interval '3 days', 'COMPLETED');
+	
+INSERT INTO public.project_assignment(pras_proj_id, pras_employee_id, pras_startdate, pras_enddate, pras_status) VALUES (1, 106, now(), null, 'IN PROGRESS');
+	
+INSERT INTO public.project_assignment(pras_proj_id, pras_employee_id, pras_startdate, pras_enddate, pras_status) VALUES (2, 104, now(), null, 'ASSIGNED');
+	
+INSERT INTO public.project_assignment(pras_proj_id, pras_employee_id, pras_startdate, pras_enddate, pras_status) VALUES (2, 105, now(), now()+ interval '3 days', 'COMPLETED');
+	
+INSERT INTO public.project_assignment(pras_proj_id, pras_employee_id, pras_startdate, pras_enddate, pras_status) VALUES (2, 106, now(), now()+ interval '3 days', 'IN PROGRESS');
+	
+	
+/*Soal 6 */
+select*from project_assignment where pras_status='COMPLETED'
